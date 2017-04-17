@@ -15,9 +15,21 @@ bool isHeap(int arr[], int i, int n)
 		return true;
 	return false;
 }
+
+void heapSort(int arr[], int n)
+{
+	Heap send(n);
+	for (int i = 0; i < n; i++)
+		send.insert(arr[n]);
+	for (int j = 0; j < n; j++) {
+		arr[j] = send.min();
+		send.remove_min();
+	}
+}
+
 int main()
 {
-	Heap h(90);
+	Heap h(900);
 	srand(time(0));
 	int v;
 	int n;
@@ -30,11 +42,12 @@ int main()
 	for (int j = 0; j < 1; j++) // number of trials
 	{
 		//n = rand() % 30000; // number of elements
-		n = 90;
+		n = 900;
 		for (int i = 0; i < n; i++)
 		{
 			v = rand() % 1000; // number to be inserted
 			h.insert(v);
+
 		}
 		for (int k = 0; k < n; k++)
 		{
@@ -43,10 +56,10 @@ int main()
 			t2 = high_resolution_clock::now();
 			time_span = duration_cast<duration<double>>(t2 - t1);
 			total = time_span.count();
-			if (k % 1001 == 0) {
+			if (k % 10 == 0) {
 				for (int z = 0; z < 20;z++)
-					cout << h.harry[z] << ", ";
-				assert(isHeap(h.harry, 1, 20));
+					cout << h.harry[z] << ", " << "\n";
+				//assert(isHeap(h.harry, 1, 20));
 				cout << n - k << ", " << total << endl;
 			}
 		}
